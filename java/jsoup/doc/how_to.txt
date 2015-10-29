@@ -1,0 +1,11 @@
+
+1. douban movie parse
+
+http://movie.douban.com/subject/25964071/
+
+a. compile
+javac -cp libs\jsoup-1.8.3.jar src\JsoupTest\DoubanMovie.java
+
+
+b. execute
+java -cp .;.\libs\jsoup-1.8.3.jar src.JsoupTest.DoubanMovie douban_test.html
