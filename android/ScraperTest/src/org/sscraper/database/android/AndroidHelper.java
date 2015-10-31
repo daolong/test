@@ -19,12 +19,20 @@ public class AndroidHelper implements DatabaseHelper {
     
     @Override
     public synchronized long insertMovie(MovieInfo movie) {
+    	long lastId = -1;
         if (dbHelper != null) {
             String sql = movie.getInsertSqlCmd();
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             db.execSQL(sql);
+            
+            String query = "SELECT ROWID from MYTABLE order by ROWID DESC limit 1";
+            Cursor c = db.rawQuery(query, null);
+            if (c != null && c.moveToFirst()) {
+                lastId = c.getLong(0); //The 0 is the column index, we only have 1 column, so the index is 0
+            }
         }
-        return -1;
+        
+        return lastId;
     }
 
     @Override

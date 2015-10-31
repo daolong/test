@@ -532,7 +532,7 @@ public class MovieInfo {
         }
     }
     
-    private void fillActor(String Str) {
+    private void fillActors(String Str) {
         if (!Str.isEmpty() && !Str.equals(" ")) {
             // name1<role1>:name2<role2>:...
             String[] strArray = Str.split(":");
@@ -560,8 +560,47 @@ public class MovieInfo {
         }
     }
     
+    private void fillScriptWriter(String Str) {
+    	if (!Str.isEmpty() && !Str.equals(" ")) {
+            String[] strArray = Str.split(":");
+            if (strArray != null && strArray.length > 0) {
+                for (int i = 0; i < strArray.length; i++) {
+                    scriptWriters.add(strArray[i]);
+                }
+            } else {
+                scriptWriters.add(Str);
+            }
+        }
+    }
+    
+    private void fillProductionCompanies(String Str) {
+    	if (!Str.isEmpty() && !Str.equals(" ")) {
+            String[] strArray = Str.split(":");
+            if (strArray != null && strArray.length > 0) {
+                for (int i = 0; i < strArray.length; i++) {
+                    productionCompanies.add(strArray[i]);
+                }
+            } else {
+                productionCompanies.add(Str);
+            }
+        }
+    }
+    
+    private void fillSpokenLanguage(String Str) {
+    	if (!Str.isEmpty() && !Str.equals(" ")) {
+            String[] strArray = Str.split(":");
+            if (strArray != null && strArray.length > 0) {
+                for (int i = 0; i < strArray.length; i++) {
+                    spokenLanguages.add(strArray[i]);
+                }
+            } else {
+                spokenLanguages.add(Str);
+            }
+        }
+    }
+    
     /**
-     * Build movie information from data base result
+     * Build movie information from Mysql data base result
      * @param rs
      * @throws SQLException
      */
@@ -600,44 +639,21 @@ public class MovieInfo {
         fillActors(Str);
         
         Str = rs.getString("script_writers");
-        if (!Str.isEmpty() && !Str.equals(" ")) {
-            String[] strArray = Str.split(":");
-            if (strArray != null && strArray.length > 0) {
-                for (int i = 0; i < strArray.length; i++) {
-                    scriptWriters.add(strArray[i]);
-                }
-            } else {
-                scriptWriters.add(Str);
-            }
-        }
+        fillScriptWriter(Str);
         
         Str = rs.getString("production_companies");
-        if (!Str.isEmpty() && !Str.equals(" ")) {
-            String[] strArray = Str.split(":");
-            if (strArray != null && strArray.length > 0) {
-                for (int i = 0; i < strArray.length; i++) {
-                    productionCompanies.add(strArray[i]);
-                }
-            } else {
-                productionCompanies.add(Str);
-            }
-        }
+        fillProductionCompanies(Str);
         
         Str = rs.getString("spoken_languages");
-        if (!Str.isEmpty() && !Str.equals(" ")) {
-            String[] strArray = Str.split(":");
-            if (strArray != null && strArray.length > 0) {
-                for (int i = 0; i < strArray.length; i++) {
-                    spokenLanguages.add(strArray[i]);
-                }
-            } else {
-                spokenLanguages.add(Str);
-            }
-        }
+        fillSpokenLanguage(Str);
         
         source = rs.getString("source");
     }
 
+    /**
+     * Build movie information from Sqlite data base result
+     * @param cr
+     */
     public MovieInfo(Cursor cr) {
         genres = new ArrayList<String>();
         directors = new ArrayList<String>();
@@ -662,5 +678,25 @@ public class MovieInfo {
         posterImageName = cr.getString(cr.getColumnIndex("poster_image_name"));
         backDropImageUrl = cr.getString(cr.getColumnIndex("backdrop_image_url"));
         backDropImageName = cr.getString(cr.getColumnIndex("backdrop_image_name"));
+        
+        String Str = cr.getString(cr.getColumnIndex("genres"));
+        fillGenres(Str);
+        
+        Str = cr.getString(cr.getColumnIndex("directors"));
+        fillDirectors(Str);
+        
+        Str = cr.getString(cr.getColumnIndex("actors"));
+        fillActors(Str);
+        
+        Str = cr.getString(cr.getColumnIndex("script_writers"));
+        fillScriptWriter(Str);
+        
+        Str = cr.getString(cr.getColumnIndex("production_companies"));
+        fillProductionCompanies(Str);
+        
+        Str = cr.getString(cr.getColumnIndex("spoken_languages"));
+        fillSpokenLanguage(Str);
+        
+        source = cr.getString(cr.getColumnIndex("source"));
     }
 }
