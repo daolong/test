@@ -1,0 +1,8 @@
+
+CREATE TABLE IF NOT EXISTS movies(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(512), vote_average DOUBLE, source VARCHAR(10));
+
+INSERT INTO movies (title,vote_average,source) VALUES ('Goodbye Mr. losser', 9.6, 'TMDB'); 
+
+INSERT INTO movies (title,vote_average,source) VALUES ('夏洛特烦恼', 9.6, 'TMDB');
+
+SELECT * FROM movies WHERE title like '%夏洛特烦恼%';
