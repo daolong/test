@@ -13,7 +13,6 @@ import org.sscraper.utils.AppConstants;
 import org.sscraper.utils.Log;
 
 import android.database.Cursor;
-import sun.net.www.http.PosterOutputStream;
 
 public class MovieInfo {
     private static String TAG = "MovieInfo";

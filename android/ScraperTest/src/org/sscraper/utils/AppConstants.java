@@ -8,7 +8,7 @@ public class AppConstants {
     // Application Version 
     public final static String VERSION = "1.0.0";
     
-    private final static boolean SERVER = true;
+    public final static boolean SERVER = false;
     
     // the movie data base 
     public final static String TMDB_API_KEY = "57983e31fb435df4df77afb854740ea9";

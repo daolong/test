@@ -10,8 +10,6 @@ import org.sscraper.Status;
 import org.sscraper.model.NameItem;
 import org.sscraper.utils.Log;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 

@@ -7,8 +7,6 @@ import java.util.Map;
 
 import org.sscraper.Status;
 
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 

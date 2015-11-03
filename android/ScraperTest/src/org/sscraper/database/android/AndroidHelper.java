@@ -5,11 +5,13 @@ package org.sscraper.database.android;
 
 import org.sscraper.database.DatabaseHelper;
 import org.sscraper.model.MovieInfo;
+import org.sscraper.utils.Log;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class AndroidHelper implements DatabaseHelper {
+    private static String TAG = "AndroidHelper";
     
     private SqliteHelper dbHelper;
     
@@ -21,14 +23,16 @@ public class AndroidHelper implements DatabaseHelper {
     public synchronized long insertMovie(MovieInfo movie) {
     	long lastId = -1;
         if (dbHelper != null) {
-            String sql = movie.getInsertSqlCmd();
+            String sql = movie.getInsertSqlCommand();
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             db.execSQL(sql);
             
-            String query = "SELECT ROWID from MYTABLE order by ROWID DESC limit 1";
+            String query = "SELECT ROWID from movies order by ROWID DESC limit 1";
             Cursor c = db.rawQuery(query, null);
             if (c != null && c.moveToFirst()) {
                 lastId = c.getLong(0); //The 0 is the column index, we only have 1 column, so the index is 0
+                Log.d(TAG, "insertMovie = " + lastId);
+                movie.setZmdbId(lastId);
             }
         }
         
@@ -45,6 +49,7 @@ public class AndroidHelper implements DatabaseHelper {
             if (cr != null) {
                 if (cr.moveToFirst()) {
                     //TODO:  maybe match several movies, check the year also 
+                	Log.d(TAG, "hit movie");
                     info = new MovieInfo(cr);
                 }
                 cr.close();

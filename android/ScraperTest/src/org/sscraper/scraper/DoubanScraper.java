@@ -19,8 +19,6 @@ import org.sscraper.network.HttpUtils;
 import org.sscraper.utils.AppConstants;
 import org.sscraper.utils.Log;
 
-import com.sun.org.apache.xml.internal.utils.NSInfo;
-
 
 public class DoubanScraper extends ScraperBase {
     private final static String NAME = "DOUBAN";
