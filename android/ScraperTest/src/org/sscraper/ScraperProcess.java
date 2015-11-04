@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.sscraper.database.DatabaseHelper;
 import org.sscraper.database.android.AndroidHelper;
-//import org.sscraper.database.mysql.MysqlHelper;
+import org.sscraper.database.mysql.MysqlHelper;
 import org.sscraper.model.MovieInfo;
 import org.sscraper.network.HttpUtils;
 import org.sscraper.scraper.*;
@@ -77,7 +77,7 @@ public class ScraperProcess {
      *          The status is 1000 if find the movie, other status means not found
      */
     public String findMovie4Server(String title, String year) {
-       //helper = new MysqlHelper();
+       helper = new MysqlHelper();
        MovieInfo movie = queryMovie(title, year);
        if (movie != null) {
            Response res = new Response(Status.OK);
