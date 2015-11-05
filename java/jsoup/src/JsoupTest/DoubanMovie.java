@@ -117,11 +117,27 @@ public class DoubanMovie {
         }
         
         
-        // overview
-        Elements overview = doc.select("[class=indent][id=link-report]");
-        if (overview != null && overview.size() > 0) {
-            Element span = overview.first();
-            Log.d(TAG, "Overview = " + span.text());
+        // overview, get the short one if contains short and full
+        Elements overviewInfo = doc.select("[class=indent][id=link-report]");
+        if (overviewInfo != null && overviewInfo.size() > 0) {
+            Element overview = overviewInfo.first();
+            Elements spans = overview.getElementsByTag("span");
+            if (spans != null && spans.size() > 0) {
+            	// short, hidden condition
+            	 String property = null;
+            	 for (Element e : spans) {
+                     property = e.attr("property");
+                     if (property != null && !property.isEmpty()) {
+                         //Log.d(TAG, "property = " + property);
+                         if (property.equals("v:summary")) {
+                             Log.d(TAG, "hit Overview : " + e.text());
+                         }
+                    }
+            	 }
+            } else {
+            	// other
+            	Log.d(TAG, "Not match Overview, use this = " + overview.text()); 
+            }
         } else {
             Log.d(TAG, "Can not find over view");
         }
