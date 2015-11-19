@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VersionList>
     <VersionItem>
-        <Version>2.0</Version>
-        <ReleaseDate>2015-10-13</ReleaseDate>
+        <Version>3.0</Version>
+        <ReleaseDate>2015-11-19</ReleaseDate>
         <VersionUrl>https://raw.githubusercontent.com/daolong/test/master/SmartPhone/SmartPhone.ipa</VersionUrl>
     </VersionItem>
 </VersionList>
